@@ -3,7 +3,6 @@ module Authorization
 
   included do
     before_action :ensure_can_access_account, if: -> { Current.account.present? && authenticated? }
-    before_action :ensure_only_staff_can_access_non_production_remote_environments, if: :authenticated?
   end
 
   class_methods do
@@ -28,10 +27,6 @@ module Authorization
 
     def ensure_can_access_account
       redirect_to session_menu_url(script_name: nil) if Current.user.blank? || !Current.user.active?
-    end
-
-    def ensure_only_staff_can_access_non_production_remote_environments
-      head :forbidden unless Rails.env.local? || Rails.env.production? || Current.identity.staff?
     end
 
     def redirect_existing_user
