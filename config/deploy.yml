@@ -41,8 +41,9 @@ env:
     - S3_RESPONSE_CHECKSUM_VALIDATION
     - CSP_CONNECT_SRC
   clear:
-    MULTI_TENANT: true # Set to true to allow multiple accounts to sign up
+    MULTI_TENANT: false # Signup closed until the CVE-2026-66066 Rails fix. Set to true to allow multiple accounts to sign up
     SOLID_QUEUE_IN_PUMA: true # Run background jobs in the app container
+    VIPS_BLOCK_UNTRUSTED: "1" # CVE-2026-66066 containment: libvips refuses untrusted loaders (MATLAB, ...)
 
 #-- General configuration --#
 
