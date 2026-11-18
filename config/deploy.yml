@@ -7,7 +7,7 @@ image: fizzy
 # Where to deploy fizzy
 servers:
   web:
-    - <%= ENV.fetch("APP_HOST") %>
+    - <%= ENV.fetch("DEPLOY_HOST") { ENV.fetch("APP_HOST") } %>
 
 # How you connect to your server
 ssh:
